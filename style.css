@@ -1,0 +1,130 @@
+/* font styles */
+@font-face {
+  font-family: Curator;
+  src: url(Curator Head ST Regular.otf);
+}
+@font-face {
+  font-family: Curator;
+  src: url(Curator Head ST Bold.otf);
+  font-weight: bold;
+}
+h1, h2, p {
+  font-family: Curator;
+  color: #333333;
+}
+h1 {
+  font-weight: bold;
+  font-size: 21px;
+}
+.headline {
+  font-size: 16px;
+  line-height: 21px;
+}
+h2 {
+  font-weight: bolder;
+  font-size: 13px;
+}
+.click {
+  font-style: italic;
+  font-size: 13px;
+}
+.country {
+  font-weight: bold;
+  font-size: 13px;
+}
+.metric, .year, .tonnes {
+  font-size: 13px;
+}
+
+/* layouts */
+html, body {
+  margin: 0;
+}
+.container {
+  padding: 3% 15%;
+  max-width: 750px;
+}
+.chart {
+  display: flex
+}
+#chart-area {
+  flex-basis: 83%;
+  order: 1
+}
+#legend-area {
+  flex-basis: 17%;
+  order: 2;
+  padding: 0 2%;
+}
+#legend {
+  display: flex;
+  flex-direction: column;
+}
+#india {
+  order: 1;
+}
+#thailand {
+  order: 2;
+}
+#vietnam {
+  order: 3;
+}
+#legend > div {
+  display: flex
+}
+#legend > div > div:nth-child(1) {
+  flex-basis: 20%;
+  border: 0;
+  height: 3px;
+  margin: 3% 5% 3% 0
+}
+#legend > div > div:nth-child(2) {
+  flex-basis: 80%
+}
+#legend > div > div:nth-child(2) > p {
+  margin: 0 0 3% 0;
+}
+#india > div:nth-child(1) {
+  background-color: #fabe9c;
+}
+#thailand > div:nth-child(1) {
+  background-color: #f6ab9a;
+}
+#vietnam > div:nth-child(1) {
+  background-color: #fed47d;
+}
+.year, .tonnes {
+  visibility: hidden;
+}
+
+@media screen and (max-width: 450px) {
+  .container {
+    padding: 5% 5%;
+  }
+  .chart {
+    display: flex;
+    flex-direction: column;
+  }
+  #chart-area {
+    order: 2
+  }
+  #legend-area {
+    order: 1
+  }
+  .click {
+    margin-top: 0;
+  }
+  .year {
+    display: none;
+  }
+  #legend {
+    display: flex;
+    flex-direction: row;
+  }
+  #legend > div {
+    flex-grow: 1;
+  }
+}
+.graph-svg-component {
+    background-color: AliceBlue;
+}
