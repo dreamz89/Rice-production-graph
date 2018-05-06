@@ -49,7 +49,8 @@ html, body {
 }
 #chart-area {
   flex-basis: 83%;
-  order: 1
+  order: 1;
+  height: 50vh;
 }
 #legend-area {
   flex-basis: 17%;
