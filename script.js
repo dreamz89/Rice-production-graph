@@ -143,7 +143,7 @@ function update(){
       .attr("d", thaiLine(data));
   }
 
-  if (countries.includes('Vietnam')){
+  if(countries.includes('Vietnam')){
     svg.append("path")
       .attr("class", "line")
       .attr("fill", "none")
@@ -151,4 +151,50 @@ function update(){
       .attr("stroke-width", "2px")
       .attr("d", vietLine(data));
   }
+
+  // Create tooltip
+  var tooltip = svg.append("g")
+    .attr("class", "tooltip")
+    .style("display", "none");
+
+  var tooltipLine = tooltip.append("line")
+    .attr("class", "x-line tooltip-line")
+    .attr("y1", 0)
+    .attr("y2", Math.max.apply(null, max));
+
+  var indiaCircle = tooltip.append("circle")
+    .attr("class", "india-circle")
+    .attr("r", 6);
+
+  var thaiCircle = tooltip.append("circle")
+    .attr("class", "thai-circle")
+    .attr("r", 6);
+
+  var vietCircle = tooltip.append("circle")
+    .attr("class", "viet-circle")
+    .attr("r", 6);
+
+  svg.append("rect")
+    .attr("class", "overlay")
+    .attr("width", width)
+    .attr("height", height)
+    .on("click", function(){
+      tooltip.style("display", 'block');
+      var bisect = d3.bisector(d => { return d.Year }).left;
+      var x0 = x.invert(d3.mouse(this)[0]),
+        i = bisect(data, x0, 1),
+        d0 = data[i - 1],
+        d1 = data[i],
+        d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+      tooltipLine.attr("transform", "translate(" + x(d.Year) + "," + 0 + ")");
+      indiaCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.India) + ")");
+      thaiCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.Thailand) + ")");
+      vietCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.Vietnam) + ")");
+
+      $('.tonnes').css("visibility", "visible");
+      $('.year').css("visibility", "visible").text((d.Year).toString())
+      india.find('.tonnes').text((d.India).toString());
+      thailand.find('.tonnes').text((d.Thailand).toString());
+      vietnam.find('.tonnes').text((d.Vietnam).toString());
+    });
 }

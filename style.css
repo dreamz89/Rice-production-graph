@@ -85,6 +85,7 @@ html, body {
 #legend > div > div:nth-child(2) > p {
   margin: 0 0 3% 0;
 }
+/* colors of legend line */
 #india > div:nth-child(1) {
   background-color: #fabe9c;
 }
@@ -94,10 +95,32 @@ html, body {
 #vietnam > div:nth-child(1) {
   background-color: #fed47d;
 }
+/* to take up space but not show yet */
 .year, .tonnes {
   visibility: hidden;
 }
 
+/* For tooltip */
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+.tooltip-line {
+  fill: none;
+  stroke: #D8D8D8;
+  stroke-width: 1.5px;
+}
+.india-circle {
+  fill: #fabe9c;
+}
+.thai-circle {
+  fill: #f6ab9a;
+}
+.viet-circle {
+  fill: #fed47d;
+}
+
+/* responsive mobile breakpoint */
 @media screen and (max-width: 450px) {
   .container {
     padding: 5% 5%;
@@ -125,7 +148,4 @@ html, body {
   #legend > div {
     flex-grow: 1;
   }
-}
-.graph-svg-component {
-    background-color: AliceBlue;
 }
