@@ -10,7 +10,7 @@ Try to replicate the example, shown in the video here, as close as possible. A f
 ●	It allows the user to click on the legend to show/hide each line, note this will also affect the Y-axis scale \
 ●	When user hovers over the line chart, it shows the value with the year on the right hand side in desktop, and apply a tooltip for mobile \
 ●	Legend moves above chart for mobile \
-●	Resizes the chart smoothly with an animation both as window changes and when hiding/showing the lines \
+●	Resizes the chart smoothly with an animation both as window changes and when hiding/showing the lines
 
 CSS annotations and fonts provided in the attachment.
 

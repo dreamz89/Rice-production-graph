@@ -138,7 +138,6 @@ function update(){
       .attr("stroke-width", "2px")
       .attr("d", indiaLine(data));
   }
-
   if(countries.includes('Thailand')){
     svg.append("path")
       .attr("class", "line")
@@ -147,7 +146,6 @@ function update(){
       .attr("stroke-width", "2px")
       .attr("d", thaiLine(data));
   }
-
   if(countries.includes('Vietnam')){
     svg.append("path")
       .attr("class", "line")
@@ -167,18 +165,6 @@ function update(){
     .attr("y1", 0)
     .attr("y2", Math.max.apply(null, max));
 
-  var indiaCircle = tooltip.append("circle")
-    .attr("class", "india-circle")
-    .attr("r", 6);
-
-  var thaiCircle = tooltip.append("circle")
-    .attr("class", "thai-circle")
-    .attr("r", 6);
-
-  var vietCircle = tooltip.append("circle")
-    .attr("class", "viet-circle")
-    .attr("r", 6);
-
   svg.append("rect")
     .attr("class", "overlay")
     .attr("width", width)
@@ -192,19 +178,29 @@ function update(){
         d1 = data[i],
         d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
       tooltipLine.attr("transform", "translate(" + x(d.Year) + "," + 0 + ")");
+      d3.selectAll('circle').remove();
       year.css("visibility", "visible").text((d.Year).toString());
       if(countries.includes('India')){
-        indiaCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.India) + ")");
+        tooltip.append("circle")
+          .attr("class", "india-circle")
+          .attr("r", 6)
+          .attr("transform", "translate(" + x(d.Year) + "," + y(d.India) + ")");
         india.find('.tonnes').css("visibility", "visible");
         india.find('.tonnes').text((d.India).toString());
       }
       if(countries.includes('Thailand')){
-        thaiCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.Thailand) + ")");
+        tooltip.append("circle")
+          .attr("class", "thai-circle")
+          .attr("r", 6)
+          .attr("transform", "translate(" + x(d.Year) + "," + y(d.Thailand) + ")");
         thailand.find('.tonnes').css("visibility", "visible");
         thailand.find('.tonnes').text((d.Thailand).toString());
       }
       if(countries.includes('Vietnam')){
-        vietCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.Vietnam) + ")");
+        tooltip.append("circle")
+          .attr("class", "viet-circle")
+          .attr("r", 6)
+          .attr("transform", "translate(" + x(d.Year) + "," + y(d.Vietnam) + ")");
         vietnam.find('.tonnes').css("visibility", "visible");
         vietnam.find('.tonnes').text((d.Vietnam).toString());
       }
