@@ -1,6 +1,8 @@
 var india = $('#india');
 var thailand = $('#thailand');
 var vietnam = $('#vietnam');
+var tonnes = $('.tonnes');
+var year = $('.year');
 var indiaOrder = 1;
 var thaiOrder = 2;
 var vietOrder = 3;
@@ -11,6 +13,7 @@ var data;
 
 // interaction from clicking the legend
 india.on('click', (e) => {
+  removeTooltip();
   if (india.css('opacity') == 0.2) {
     indiaOrder = min;
     india.css('order', indiaOrder);
@@ -27,6 +30,7 @@ india.on('click', (e) => {
   }
 })
 thailand.on('click', (e) => {
+  removeTooltip();
   if (thailand.css('opacity') == 0.2) {
     thaiOrder = min;
     thailand.css('order', thaiOrder);
@@ -43,6 +47,7 @@ thailand.on('click', (e) => {
   }
 })
 vietnam.on('click', (e) => {
+  removeTooltip();
   if (vietnam.css('opacity') == 0.2) {
     vietOrder = min;
     vietnam.css('order', vietOrder);
@@ -187,14 +192,27 @@ function update(){
         d1 = data[i],
         d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
       tooltipLine.attr("transform", "translate(" + x(d.Year) + "," + 0 + ")");
-      indiaCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.India) + ")");
-      thaiCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.Thailand) + ")");
-      vietCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.Vietnam) + ")");
-
-      $('.tonnes').css("visibility", "visible");
-      $('.year').css("visibility", "visible").text((d.Year).toString())
-      india.find('.tonnes').text((d.India).toString());
-      thailand.find('.tonnes').text((d.Thailand).toString());
-      vietnam.find('.tonnes').text((d.Vietnam).toString());
+      year.css("visibility", "visible").text((d.Year).toString());
+      if(countries.includes('India')){
+        indiaCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.India) + ")");
+        india.find('.tonnes').css("visibility", "visible");
+        india.find('.tonnes').text((d.India).toString());
+      }
+      if(countries.includes('Thailand')){
+        thaiCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.Thailand) + ")");
+        thailand.find('.tonnes').css("visibility", "visible");
+        thailand.find('.tonnes').text((d.Thailand).toString());
+      }
+      if(countries.includes('Vietnam')){
+        vietCircle.attr("transform", "translate(" + x(d.Year) + "," + y(d.Vietnam) + ")");
+        vietnam.find('.tonnes').css("visibility", "visible");
+        vietnam.find('.tonnes').text((d.Vietnam).toString());
+      }
     });
+}
+
+function removeTooltip(){
+  tonnes.css("visibility", "hidden");
+  year.css("visibility", "hidden");
+  $('.tooltip').remove();
 }
