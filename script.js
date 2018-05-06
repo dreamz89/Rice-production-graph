@@ -74,12 +74,15 @@ var svg = d3.select('#chart-area').append("svg")
     .attr('preserveAspectRatio','xMinYMin');
 
 // Set scales of X and Y axis
-var x = d3.scaleLinear().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
+var x = d3.scaleLinear().range([50, width - 20]);
+var y = d3.scaleLinear().range([height - 50, 0]);
 
 // Create axis
-var xAxisCall = d3.axisBottom(x);
-var yAxisCall = d3.axisLeft(y);
+var xAxisCall = d3.axisBottom(x)
+  .tickFormat(d3.format("d"))
+  .tickValues([1990, 1995, 2000, 2005, 2010, 2015]);
+var yAxisCall = d3.axisLeft(y)
+  .ticks(8);
 
 var xAxis = svg.append('g')
   .attr('class', 'x-axis')
