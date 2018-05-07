@@ -9,6 +9,7 @@ var vietOrder = 3;
 var min = Math.min(indiaOrder, thaiOrder, vietOrder) - 1;
 var max = Math.max(indiaOrder, thaiOrder, vietOrder) + 1;
 var countries = ['India', 'Thailand', 'Vietnam'];
+var t = d3.transition().duration(2000);
 var data;
 
 // interaction from clicking the legend
@@ -67,11 +68,14 @@ vietnam.on('click', (e) => {
 // create responsive chart area
 var height = $('#chart-area').height();
 var width = $('#chart-area').width();
-var svg = d3.select('#chart-area').append("svg")
-    .attr("width", '100%')
-    .attr("height", '100%')
-    .attr('viewBox','0 0 '+ Math.min(width,height)+ ' '+ Math.min(width,height))
-    .attr('preserveAspectRatio','xMinYMin');
+
+var svg = d3.select("#chart-area")
+  .append("div")
+  .classed("svg-container", true)
+  .append("svg")
+  .attr("preserveAspectRatio", "xMinYMin meet")
+  .attr("viewBox","0 0 " + width + " " + height)
+  .classed("svg-content-responsive", true);
 
 // Set scales of X and Y axis
 var x = d3.scaleLinear().range([50, width - 20]);
@@ -111,11 +115,12 @@ d3.csv('milledRiceEndingStocks.csv').then(dataz => {
     row.Vietnam = +row.Vietnam;
   });
   data = dataz;
+  // Call initial chart on loading the page
   update();
 })
 
 function update(){
-  // find the max of the existing lines for the domain
+  // find the max of the chosen lines for the domain
   var max = [];
   countries.forEach(country => {
     max.push(d3.max(data, d => { return (d[country]) }))
@@ -126,8 +131,8 @@ function update(){
   y.domain([0, Math.max.apply(null, max)])
 
   // Call the axis
-  xAxis.call(xAxisCall);
-  yAxis.call(yAxisCall);
+  xAxis.transition(t).call(xAxisCall);
+  yAxis.transition(t).call(yAxisCall);
 
   // Clear all previous lines
   d3.selectAll("path.line").remove();
